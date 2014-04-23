@@ -1,0 +1,44 @@
+//.info
+//    .name
+//      Jeffrey
+//    .age
+//      tussen 4 en 8
+//    .pics
+//      %i.fa.fa-camera
+//      3
+.image-and-info{
+  margin-top: 20px;
+  .image{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    background-image: url('jeffrey.jpeg');
+    background-size: auto;
+    background-position: center;
+
+  }
+  .info{
+    color: #fff;
+    padding: 7px;
+    background-color: $mint-blue;
+    text-transform: uppercase;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-bottom: 20px;
+    .name{
+      font-size: 16px;
+      font-weight: 100;
+      margin-bottom: 3px;
+    }
+    .age{
+      font-size: 13px;
+      font-weight: 100;
+    }
+    .pics{
+      float: right;
+    }
+  }
+
+}
