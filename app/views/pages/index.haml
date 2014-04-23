@@ -1,4 +1,4 @@
-.image-and-info
+.image-and-info#dog
   .image
   .info
     .pics
@@ -8,7 +8,10 @@
       Jeffrey
     .age
       tussen 4 en 8 jaar
-
+  #love
+    Love
+  #put-down
+    Kill
 .controls
   #like.button
     %i.fa.fa-times
@@ -16,4 +19,16 @@
     %i.fa.fa-info
   #dislike.button
     %i.fa.fa-heart-o
+
+
+= content_for :javascript do
+  :javascript
+    window.onload=function(){
+      var baasje = new Baasje("#dog");
+      baasje.init();
+      $('#dog').addClass("animate");
+      document.ontouchmove = function(event){
+          event.preventDefault();
+      }
+    }
 

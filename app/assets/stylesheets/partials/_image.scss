@@ -1,13 +1,21 @@
-//.info
-//    .name
-//      Jeffrey
-//    .age
-//      tussen 4 en 8
-//    .pics
-//      %i.fa.fa-camera
-//      3
 .image-and-info{
   margin-top: 20px;
+  transform: translate3d(5%,0,0) scale3d(1,1,1);
+  position: relative;
+  #love{
+    display: none;
+      position: absolute;
+  right: 20px;
+  bottom: 119px;
+  font-size: 50px;
+  color: pink;
+  }
+  &.animate{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+  }
   .image{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
