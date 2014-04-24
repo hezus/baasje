@@ -5,7 +5,7 @@ require 'open-uri'
 require 'rest_client'
 
 class Dog < ActiveRecord::Base
-
+  has_many :selfies
   def self.crawlFromDierenBescherming
     self.parse_index_page "zoek-asieldieren/honden"
     #html_doc = RestClient.get "http://ikzoekbaas.dierenbescherming.nl/zoek-asieldieren/honden"
@@ -42,7 +42,21 @@ class Dog < ActiveRecord::Base
       puts "#{name}: #{age}, #{race}, #{image_url}"
 
     if image_url.present?
-      Dog.create!({name: name.squeeze(" ").strip, race: race.squeeze(" ").strip, age: age.squeeze(" ").strip, image: CGI::unescapeHTML("http://ikzoekbaas.dierenbescherming.nl#{image_url}original")})
+      image_url = CGI::unescapeHTML("http://ikzoekbaas.dierenbescherming.nl#{image_url}original")
+      name =  name.squeeze(" ").strip
+      id = ActiveSupport::Inflector.transliterate name.downcase.gsub(/\s/,"_").gsub(/[^\w_]/, '')
+      upload = Cloudinary::Uploader.upload(image_url, :public_id => id, :width => 600, :height => 500, crop: :fill, effect: :trim)
+
+
+      upload.delete 'type'
+
+
+
+
+
+      dog = Dog.create!({name: name, race: race.squeeze(" ").strip, age: age.squeeze(" ").strip, image: upload['url']})
+      upload['dog_id'] = dog.id
+      Selfie.create! upload
     end
 
 

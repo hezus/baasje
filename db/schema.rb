@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424020056) do
+ActiveRecord::Schema.define(version: 20140424061127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,23 @@ ActiveRecord::Schema.define(version: 20140424020056) do
     t.text     "race"
     t.string   "location"
     t.text     "badges"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "selfies", force: true do |t|
+    t.integer  "dog_id"
+    t.string   "public_id"
+    t.string   "version"
+    t.text     "signature"
+    t.string   "width"
+    t.string   "height"
+    t.string   "format"
+    t.string   "resource_type"
+    t.string   "bytes"
+    t.string   "etag"
+    t.text     "url"
+    t.text     "secure_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

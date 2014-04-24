@@ -10,7 +10,7 @@ class PagesController < ApplicationController
     Dog.destroy_all
     Dog.crawlFromDierenBescherming
     #redirect_to root_path
-    #redirect to root path
+    redirect_to json_path
   end
 
 
