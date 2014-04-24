@@ -3,13 +3,12 @@ body{
   width: 320px;
   background-color: #f2f2f1;
   overflow: hidden;
-  border: 1px solid black;
   margin: auto;
   &.red-alert{
     background-color: red;
   }
 }
 .container{
-   width:250px;
+  width:320px;
   margin: auto;
 }

@@ -1,34 +1,50 @@
-.image-and-info#dog
-  .image
-  .info
-    .pics
-      %i.fa.fa-camera
-      3
-    .name
-      Jeffrey
-    .age
-      tussen 4 en 8 jaar
-  #love
-    Love
-  #put-down
-    Kill
-.controls
-  #like.button
-    %i.fa.fa-times
-  #info.button
-    %i.fa.fa-info
-  #dislike.button
-    %i.fa.fa-heart-o
-
+#loader
+  = image_tag 'loader.gif'
+#ui
+  .image-and-info
+    .image
+    .info
+      .pics
+        %i.fa.fa-camera
+        %span.pic_amount
+      .name
+      .age
+    .love
+      Love
+    .kill
+      Kill
+  #controls
+    #like.button
+      %i.fa.fa-crosshairs
+    #info.button
+      %i.fa.fa-info
+    #dislike.button
+      %i.fa.fa-heart-o
+  #info-extended
+    .name-and-age
+      %span.name
+        Max
+      %span.age
+        , 4 tot 8 jaar
+    .location
+      Barn
+    .badges
+      .badge
+        = image_tag 'crunked.png'
+      .badge
+        = image_tag 'playerplease.png'
+      .badge
+        = image_tag 'local.png'
 
 = content_for :javascript do
   :javascript
+
+    document.ontouchmove = function(event){
+        event.preventDefault();
+    }
     window.onload=function(){
-      var baasje = new Baasje("#dog");
-      baasje.init();
-      $('#dog').addClass("animate");
-      document.ontouchmove = function(event){
-          event.preventDefault();
-      }
+        var baasje = new Baasje(".image-and-info", '#loader', '/dogs.json');
+        baasje.init();
+
     }
 

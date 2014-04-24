@@ -1,18 +1,18 @@
 {"dogs" :[
     { "name" : "max",
-        "images": [{"url": "/pubic/images/max.jpeg"}],
+        "images": [{"url": "/images/max.jpeg"}],
         "location": "Ede",
         "age": "4 tot 8 jaar",
         "original_url": "http://ikzoekbaas.dierenbescherming.nl/asiel-dieren/hond/50809/hofvanede-ede"
     },
     { "name" : "jeffrey",
-        "images": [{"url": "/pubic/images/jeffrey.jpeg"}, {"url": "/pubic/images/jeffrey2.jpeg"}],
+        "images": [{"url": "/images/jeffrey.jpeg"}, {"url": "/pubic/images/jeffrey2.jpeg"}],
         "location": "Born",
         "age": "4 tot 8 jaar",
         "original_url": "http://ikzoekbaas.dierenbescherming.nl/asiel-dieren/hond/70302/limburg-born"
     },
     { "name" : "gybor",
-        "images": [{"url": "/pubic/images/gybor.jpeg"}, {"url": "/pubic/images/gybor.jpeg"}],
+        "images": [{"url": "/images/gybor.jpeg"}, {"url": "/pubic/images/gybor.jpeg"}],
         "location": "Born",
         "age": "4 tot 8 jaar",
         "original_url": "http://ikzoekbaas.dierenbescherming.nl/asiel-dieren/hond/72736/dierentehuis-den-bosch"

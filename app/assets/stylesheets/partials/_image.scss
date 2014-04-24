@@ -1,16 +1,64 @@
-.image-and-info{
-  margin-top: 20px;
-  transform: translate3d(5%,0,0) scale3d(1,1,1);
-  position: relative;
-  #love{
-    display: none;
-      position: absolute;
-  right: 20px;
-  bottom: 119px;
-  font-size: 50px;
-  color: pink;
+#ui{
+  display: none;
+  width: 250px;
+  margin: auto;
+  &.details{
+    width: 320px;
   }
+}
+.image-and-info{
+  -webkit-box-shadow: 0 7px 20px -6px black;
+  -moz-box-shadow: 0 7px 20px -6px black;
+  box-shadow: 0 7px 20px -6px black;
+  margin-top: 20px;
+  -webkit-backface-visibility: hidden;
+  border-radius: 5px;
+//  width: 250px;
+  box-sizing: border-box;
+
+  &.moving-offscreen{
+    z-index: 2000;
+  }
+  &.level_1{
+    z-index: 1000;
+  }
+  &.level_2{
+    z-index: -1;
+    position: absolute;
+    top: 4px;
+    width: 244px;
+    margin-left: 3px;
+  }
+  &.level_3{
+    z-index: -2;
+    position: absolute;
+    top: 8px;
+    width: 238px;
+    margin-left: 6px;
+  }
+
+
+  .love{
+    display: none;
+    position: absolute;
+    left: 20px;
+    bottom: 119px;
+    font-size: 50px;
+    color: pink;
+  }
+
+  .kill{
+    display: none;
+    position: absolute;
+    right: 20px;
+    bottom: 119px;
+    font-size: 50px;
+    color: red;
+
+  }
+
   &.animate{
+    //all tranforms are set by code
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     -o-transition: all .3s;
@@ -19,11 +67,10 @@
   .image{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    width: 250px;
-    height: 250px;
+//    width: 250px;
+    height: 200px;
     overflow: hidden;
-    background-image: url('jeffrey.jpeg');
-    background-size: auto;
+    background-size: cover;
     background-position: center;
 
   }
@@ -35,6 +82,9 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     padding-bottom: 20px;
+//    width: 250px;
+  box-sizing: border-box;
+
     .name{
       font-size: 16px;
       font-weight: 100;
