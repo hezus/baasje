@@ -34,9 +34,16 @@ class Dog < ActiveRecord::Base
     #begin
       name = doc.css('.print_naam').text
       details_text = doc.css('.detailcol').inner_html.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+
       age = /Leeftijd\<\/strong\>\:(?<age>.*?)<br/.match(details_text)[:age]
       race = /Ras<\/strong>: (?<ras>.*?)<br/.match(details_text)[:ras]
       race = race == 'Terrirs' ? 'Terriers' : race
+
+      shelter_details = doc.css('table.asieldier').inner_html.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+
+      shelter_city = /\d{4}.\w\w.(?<city>[^<]+)/mi.match(shelter_details)[:city]
+      shelter_name = /td>(?<name>[^<]*)<br/.match(shelter_details)[:name]
+      #todo: try transliterate (http://api.rubyonrails.org/classes/ActiveSupport/Inflector.html)
       image = doc.css('#profiel_area').inner_html
       image_url = /[^"]+size=/.match(image)
       puts "#{name}: #{age}, #{race}, #{image_url}"
@@ -46,16 +53,10 @@ class Dog < ActiveRecord::Base
       name =  name.squeeze(" ").strip
       id = ActiveSupport::Inflector.transliterate name.downcase.gsub(/\s/,"_").gsub(/[^\w_]/, '')
       upload = Cloudinary::Uploader.upload(image_url, :public_id => id, :width => 600, :height => 500, crop: :fill, effect: :trim)
-
-
       upload.delete 'type'
-
-
-
-
-
-      dog = Dog.create!({name: name, race: race.squeeze(" ").strip, age: age.squeeze(" ").strip, image: upload['url']})
+      dog = Dog.create!({name: name, race: race.squeeze(" ").strip, age: age.squeeze(" ").strip, image: upload['url'], shelter_city: shelter_city, shelter_name: shelter_name, original_url: url})
       upload['dog_id'] = dog.id
+      upload['original_url'] = image_url
       Selfie.create! upload
     end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424061127) do
+ActiveRecord::Schema.define(version: 20140424064934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,9 @@ ActiveRecord::Schema.define(version: 20140424061127) do
     t.text     "badges"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "original_url"
+    t.text     "shelter_name"
+    t.text     "shelter_city"
   end
 
   create_table "selfies", force: true do |t|
@@ -42,6 +45,7 @@ ActiveRecord::Schema.define(version: 20140424061127) do
     t.text     "secure_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "original_url"
   end
 
 end

@@ -54,12 +54,7 @@ var Baasje = function(element, loader, json_url){
 
 
     };
-    function setDogBasicInfo(element, dog){
-        element.find('.image').css('background-image', 'url(' + dog.image + ')');
-        element.find('.name').text( dog.name);
-        element.find('.age').text( dog.age);
-        element.find('.pic_amount').text( 1);
-    }
+
     function hideLoader(){
          $('#ui').show();
          $('#loader').hide();
@@ -112,15 +107,25 @@ var Baasje = function(element, loader, json_url){
         self.detail_view = !self.detail_view;
 
     }
+    function setDogBasicInfo(element, dog){
+        element.find('.image').css('background-image', 'url(' + dog.image + ')');
+        element.find('.name').text( dog.name);
+        element.find('.age').text( dog.age);
+        element.find('.pic_amount').text( 1);
+    }
+
     function showDetails(dog){
         var infoContainer = $('#info-extended');
         infoContainer.show();
         _element.find('.info').hide();
         $('#controls').hide();
         $('#ui').addClass('details');
-
+        //update values
+        infoContainer.find('.name').text( dog.name);
+        infoContainer.find('.age').text( ', '+dog.age);
+        infoContainer.find('.shelter_name').text( dog.shelter_name);
+        infoContainer.find('.shelter_city').text( ', ' +dog.shelter_city);
         //hide the image aswell after it is shown.
-
         //replace it with a carrousel
 
 
@@ -184,7 +189,8 @@ var Baasje = function(element, loader, json_url){
                     self.dogs.shift();
 
                     //if there are still more then 3 dogs
-                        //add a 4th
+                        //add a 4th, maybe
+                        // TODO: do some loading here if only 5 dogs left
 
                     if(self.dogs.length > 3){
                         new_dog = $(element_name+":last").clone().insertAfter(element_name+":last");
