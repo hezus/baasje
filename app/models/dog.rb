@@ -30,7 +30,7 @@ class Dog < ActiveRecord::Base
   def self.parse_show_page url
     html_doc = RestClient.get url
     doc = Nokogiri::HTML(html_doc)
-    puts url
+    #puts url
     #begin
       name = doc.css('.print_naam').text
       details_text = doc.css('.detailcol').inner_html.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
@@ -46,11 +46,12 @@ class Dog < ActiveRecord::Base
       #todo: try transliterate (http://api.rubyonrails.org/classes/ActiveSupport/Inflector.html)
       image = doc.css('#profiel_area').inner_html
       image_url = /[^"]+size=/.match(image)
-      puts "#{name}: #{age}, #{race}, #{image_url}"
-
-    if image_url.present?
-      image_url = CGI::unescapeHTML("http://ikzoekbaas.dierenbescherming.nl#{image_url}original")
       name =  name.squeeze(" ").strip
+
+
+    if image_url.present? && (! Dog.find_by(name: name).present?)
+      image_url = CGI::unescapeHTML("http://ikzoekbaas.dierenbescherming.nl#{image_url}original")
+
       id = ActiveSupport::Inflector.transliterate name.downcase.gsub(/\s/,"_").gsub(/[^\w_]/, '')
       upload = Cloudinary::Uploader.upload(image_url, :public_id => id, :width => 600, :height => 500, crop: :fill, effect: :trim)
       upload.delete 'type'

@@ -4,6 +4,16 @@
   margin: auto;
   &.details{
     width: 320px;
+    .image-and-info{
+      -webkit-box-shadow: none;
+      -moz-box-shadow:none;
+      box-shadow: none;
+      border-radius: 0!important;
+      .image{
+        border-top-left-radius: 0!important;
+        border-top-right-radius: 0!important;
+      }
+    }
   }
 }
 .image-and-info{
@@ -12,9 +22,10 @@
   box-shadow: 0 7px 20px -6px black;
   margin-top: 20px;
   -webkit-backface-visibility: hidden;
-  border-radius: 5px;
+  border-radius: 0;
 //  width: 250px;
   box-sizing: border-box;
+
 
   &.moving-offscreen{
     z-index: 2000;

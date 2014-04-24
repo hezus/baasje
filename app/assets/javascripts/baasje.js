@@ -122,9 +122,10 @@ var Baasje = function(element, loader, json_url){
         $('#ui').addClass('details');
         //update values
         infoContainer.find('.name').text( dog.name);
-        infoContainer.find('.age').text( ', '+dog.age);
+        infoContainer.find('.age').text( dog.age );
+        infoContainer.find('.race').text( 'Ras: '+dog.race );
         infoContainer.find('.shelter_name').text( dog.shelter_name);
-        infoContainer.find('.shelter_city').text( ', ' +dog.shelter_city);
+        infoContainer.find('.shelter_city').text( dog.shelter_city);
         //hide the image aswell after it is shown.
         //replace it with a carrousel
 

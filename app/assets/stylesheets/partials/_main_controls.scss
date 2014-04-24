@@ -7,22 +7,24 @@
     color: #fff;
     float:left;
   }
+  #like{
+    @extend .icons-like;
+  }
+  #dislike{
+    @extend .icons-dislike;
+  }
+  #info{
+    @extend .icons-details;
+  }
   #like, #dislike{
-    font-size: 50px;
-    line-height: 75px;
-    width: 75px;
-    border-radius: 37px;
-    height: 75px;
-    text-align: center;
+    width: 84px;
+    height: 84px;
     margin: 0 10px;
   }
   #info{
-    width: 50px;
-    height: 50px;
+    width: 46px;
+    height: 48px;
     border-radius: 25px;
-    font-size: 40px;
-    line-height: 50px;
-text-align: center;
-margin-top: 15px;
+    margin-top: 15px;
   }
 }

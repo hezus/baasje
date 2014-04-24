@@ -15,29 +15,27 @@
       Kill
   #controls
     #like.button
-      %i.fa.fa-crosshairs
     #info.button
-      %i.fa.fa-info
     #dislike.button
-      %i.fa.fa-heart-o
   #info-extended
-    .name-and-age
-      %span.name
-
-      %span.age
-
-    .location
-      %span.shelter_name
-
-      %span.shelter_city
-
+    .text
+      .name-and-age
+        .name
+        .age
+      .race
+      .location
+        .shelter_name
+        .shelter_city
     .badges
       .badge
-        = image_tag 'crunked.png'
+        = image_tag 'speels.png'
+        Speels
       .badge
-        = image_tag 'playerplease.png'
+        = image_tag 'buiten.png'
+        Buiten
       .badge
-        = image_tag 'local.png'
+        = image_tag 'andere_honden.png'
+        Andere honden
 
 = content_for :javascript do
   :javascript

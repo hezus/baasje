@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     render :json => @dogs
   end
   def crawl
-    Dog.destroy_all
+    #Dog.destroy_all
     Dog.crawlFromDierenBescherming
     #redirect_to root_path
     redirect_to json_path

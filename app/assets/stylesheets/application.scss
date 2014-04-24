@@ -1,5 +1,15 @@
 @import 'variables';
+@import "compass";
+
+
+$icons-sprite-dimensions: true;
+$icons-sprite-clean-up: true;
+$icons-sprite-spacing: 2px;
+@import "icons/*.png";
+@include all-icons-sprites;
+
 @import 'normalize';
+
 @import 'font-awesome';
 @import 'main';
 @import './partials/*';
