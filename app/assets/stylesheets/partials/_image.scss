@@ -36,6 +36,14 @@
     width: 238px;
     margin-left: 6px;
   }
+  &.level_4{
+    z-index: -2;
+    position: absolute;
+    top: 8px;
+    width: 238px;
+    margin-left: 6px;
+    box-shadow: 0;
+  }
 
 
   .love{
@@ -89,6 +97,8 @@
       font-size: 16px;
       font-weight: 100;
       margin-bottom: 3px;
+      height: 18px;
+      overflow: hidden;
     }
     .age{
       font-size: 13px;

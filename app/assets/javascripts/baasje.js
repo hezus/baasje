@@ -14,14 +14,7 @@ var Baasje = function(element, loader, json_url){
     var detail_view = false;
 
     this.init = function() {
-        //load data
-
-            setPaneDimensions();
-
-
-//            $(window).on("resize orientationchange", function() {
-//                setPaneDimensions();
-//            })
+        setPaneDimensions();
         loadData();
     };
 
@@ -29,7 +22,7 @@ var Baasje = function(element, loader, json_url){
         $.getJSON(json_url)
           .done(function( json ) {
             console.log( ["JSON Data", json]);
-            buildUI(json.dogs);
+            buildUI(json);
           })
           .fail(function( jqxhr, textStatus, error ) {
             var err = textStatus + ", " + error;
@@ -44,26 +37,29 @@ var Baasje = function(element, loader, json_url){
 
         var dog = dogs[0];
 
-        _element.find('.image').css('background-image', 'url(' + dog.images[0].url + ')');
-        _element.find('.name').text( dog.name);
-        _element.find('.age').text( dog.age);
-        _element.find('.pic_amount').text( dog.images.length);
+        setDogBasicInfo(_element, dog)
+
 
         var length = dogs.length;
-        for(var i = 1; i < dogs.length; i++){
+        for(var i = 1; i < 3; i++){
             var dog = dogs[i];
             //dont clone if its the last one
             var new_element = _element.clone().insertAfter(element_name+":last");
             new_element.addClass('level_'+(i+1));
-            new_element.find('.image').css('background-image', 'url(' + dog.images[0].url + ')');
-            new_element.find('.name').text( dog.name);
-            new_element.find('.age').text( dog.age);
-            new_element.find('.pic_amount').text( dog.images.length);
+
+            setDogBasicInfo(new_element, dog)
         }
         _element.addClass('level_1');
         hammer = new Hammer(_element[0]).on("release drag swipe tap", handleHammer);
 
+
     };
+    function setDogBasicInfo(element, dog){
+        element.find('.image').css('background-image', 'url(' + dog.image + ')');
+        element.find('.name').text( dog.name);
+        element.find('.age').text( dog.age);
+        element.find('.pic_amount').text( 1);
+    }
     function hideLoader(){
          $('#ui').show();
          $('#loader').hide();
@@ -182,8 +178,20 @@ var Baasje = function(element, loader, json_url){
                 _element.find('.love').hide();
                 _element.find('.kill').hide();
                 if(pastLeftBoundry || pastRightBoundry){
-                    _element.hide();
+                    debugger;
                     hideDetails();
+                    _element.remove();
+                    self.dogs.shift();
+
+                    //if there are still more then 3 dogs
+                        //add a 4th
+
+                    if(self.dogs.length > 3){
+                        new_dog = $(element_name+":last").clone().insertAfter(element_name+":last");
+                        new_dog.addClass('level_4');
+                        new_dog.removeClass('level_3')
+                        setDogBasicInfo(new_dog, self.dogs[3])
+                    }
                     $('body').find(element_name+':visible').each(function(index, element_ref) {
                         var loop_element = $(element_ref);
                         var cloned_element = loop_element.clone().insertBefore(loop_element);
@@ -195,21 +203,18 @@ var Baasje = function(element, loader, json_url){
                             self._new_element = cloned_element;
                         }
                     });
+                    //maybe add a new dawg!
+
+
                     rebindHammer(self._new_element); //this also sets the _element variable
                     moved_x = 0;
                     moved_y = 0;
                 }else{
-
-//                    moved_x = 0;
-//                    moved_y = 0;
-                    //I like to move it
-//                    console.log([{movedX: moved_x, movedY: moved_y}])
-//                    setContainerOffset(moved_x, moved_y, true);
-                    //move it
+                    setContainerOffset(moved_x, moved_y, true);
+                    moved_x = 0;
+                    moved_y = 0;
                 }
-                setContainerOffset(moved_x, moved_y, true);
-                moved_x = 0;
-                moved_y = 0;
+
 
                 break;
         }
