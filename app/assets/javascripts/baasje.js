@@ -21,12 +21,12 @@ var Baasje = function(element, loader, json_url){
     function loadData(){
         $.getJSON(json_url)
           .done(function( json ) {
-            console.log( ["JSON Data", json]);
+//            console.log( ["JSON Data", json]);
             buildUI(json);
           })
           .fail(function( jqxhr, textStatus, error ) {
             var err = textStatus + ", " + error;
-            console.log( "Request Failed: " + err );
+//            console.log( "Request Failed: " + err );
           });
 
     };

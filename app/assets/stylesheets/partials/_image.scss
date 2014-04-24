@@ -2,6 +2,7 @@
   display: none;
   width: 250px;
   margin: auto;
+  //details switch
   &.details{
     width: 320px;
     .image-and-info{
@@ -9,9 +10,12 @@
       -moz-box-shadow:none;
       box-shadow: none;
       border-radius: 0!important;
+      margin-top: 0!important;
       .image{
         border-top-left-radius: 0!important;
         border-top-right-radius: 0!important;
+        height: 250px;
+
       }
     }
   }
