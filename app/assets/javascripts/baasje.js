@@ -178,7 +178,7 @@ var Baasje = function(element, loader, json_url){
                 _element.find('.love').hide();
                 _element.find('.kill').hide();
                 if(pastLeftBoundry || pastRightBoundry){
-                    debugger;
+//                    debugger;
                     hideDetails();
                     _element.remove();
                     self.dogs.shift();

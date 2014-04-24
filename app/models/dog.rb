@@ -40,8 +40,12 @@ class Dog < ActiveRecord::Base
       image = doc.css('#profiel_area').inner_html
       image_url = /[^"]+size=/.match(image)
       puts "#{name}: #{age}, #{race}, #{image_url}"
-      image_url = image_url.present? ? CGI::unescapeHTML("http://ikzoekbaas.dierenbescherming.nl#{image_url}original") : image_url
-    Dog.create!({name: name.squeeze(" ").strip, race: race.squeeze(" ").strip, age: age.squeeze(" ").strip, image: image_url})
+
+    if image_url.present?
+      Dog.create!({name: name.squeeze(" ").strip, race: race.squeeze(" ").strip, age: age.squeeze(" ").strip, image: CGI::unescapeHTML("http://ikzoekbaas.dierenbescherming.nl#{image_url}original")})
+    end
+
+
     #rescue Exception
     #end
     #puts '========================================================'

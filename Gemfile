@@ -32,6 +32,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'carrierwave'
+gem 'cloudinary'
 
 gem 'rest-client'
 gem 'nokogiri'
@@ -39,8 +41,8 @@ gem 'nokogiri'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-# gem 'unicorn'
-
+ gem 'unicorn'
+gem 'rails_12factor'
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
