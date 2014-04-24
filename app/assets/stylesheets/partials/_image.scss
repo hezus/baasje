@@ -66,8 +66,7 @@
     position: absolute;
     left: 20px;
     bottom: 119px;
-    font-size: 50px;
-    color: pink;
+    @extend .icons-overlay_like
   }
 
   .kill{
@@ -75,8 +74,7 @@
     position: absolute;
     right: 20px;
     bottom: 119px;
-    font-size: 50px;
-    color: red;
+    @extend .icons-overlay_dislike
 
   }
 

@@ -8,15 +8,18 @@ var Baasje = function(element, loader, json_url){
     var _new_element;
     var pane_width = 0;
     var pane_count = 1;
-    var moved_x = 0;
-    var moved_y = 0;
+    var moved_x;
+    var moved_y;
     var element_name = '.image-and-info';
     var detail_view = false;
 
     this.init = function() {
         setPaneDimensions();
         loadData();
+        clickHandlers();
     };
+
+
 
     function loadData(){
         $.getJSON(json_url)
@@ -65,11 +68,18 @@ var Baasje = function(element, loader, json_url){
     };
 
     function setContainerOffset(x, y, reset) {
+//        console.log(['reset', x, y])
         _element.removeClass("animate");
         //god knows what animate does
         if(reset) {
+            console.log(['reset', x, y])
             _element.addClass("animate");
-            _element.css("transform", "translate(-"+ x +"px, -" + y + "px)");
+            if(x > 0 && y > 0){
+                _element.css("transform", "translate(0, 0)");
+            }else{
+                _element.css("transform", "translate(-"+ x +"px, -" + y + "px)");
+            }
+
 
         }
         else{
@@ -101,7 +111,7 @@ var Baasje = function(element, loader, json_url){
             hideDetails()
             rebindHammer(_element)
         }else{
-            disableDragOnHammer();
+
             showDetails(dog)
         }
         self.detail_view = !self.detail_view;
@@ -115,6 +125,8 @@ var Baasje = function(element, loader, json_url){
     }
 
     function showDetails(dog){
+        disableDragOnHammer();
+
         var infoContainer = $('#info-extended');
         infoContainer.show();
         _element.find('.info').hide();
@@ -185,41 +197,16 @@ var Baasje = function(element, loader, json_url){
                 _element.find('.kill').hide();
                 if(pastLeftBoundry || pastRightBoundry){
 //                    debugger;
-                    hideDetails();
-                    _element.remove();
-                    self.dogs.shift();
 
+                   next(ev.gesture.direction);
                     //if there are still more then 3 dogs
                         //add a 4th, maybe
                         // TODO: do some loading here if only 5 dogs left
 
-                    if(self.dogs.length > 3){
-                        new_dog = $(element_name+":last").clone().insertAfter(element_name+":last");
-                        new_dog.addClass('level_4');
-                        new_dog.removeClass('level_3')
-                        setDogBasicInfo(new_dog, self.dogs[3])
-                    }
-                    $('body').find(element_name+':visible').each(function(index, element_ref) {
-                        var loop_element = $(element_ref);
-                        var cloned_element = loop_element.clone().insertBefore(loop_element);
-                        //clone it. and give it the new class
-                        cloned_element.addClass('level_'+ (index + 1) );
-                        cloned_element.removeClass('level_'+ (index + 2));
-                        loop_element.remove();
-                        if(index === 0){
-                            self._new_element = cloned_element;
-                        }
-                    });
-                    //maybe add a new dawg!
-
-
-                    rebindHammer(self._new_element); //this also sets the _element variable
-                    moved_x = 0;
-                    moved_y = 0;
                 }else{
                     setContainerOffset(moved_x, moved_y, true);
-                    moved_x = 0;
-                    moved_y = 0;
+//                    moved_x = 0;
+//                    moved_y = 0;
                 }
 
 
@@ -227,4 +214,47 @@ var Baasje = function(element, loader, json_url){
         }
 
     };
+    function next(direction){
+        hideDetails();
+        //instead of remove. add css animation in this direction
+
+        _element.remove();
+        self.dogs.shift();
+        if(self.dogs.length > 3){
+            new_dog = $(element_name+":last").clone().insertAfter(element_name+":last");
+            new_dog.addClass('level_4');
+            new_dog.removeClass('level_3')
+            setDogBasicInfo(new_dog, self.dogs[3])
+        }
+        $('body').find(element_name+':visible').each(function(index, element_ref) {
+            var loop_element = $(element_ref);
+            var cloned_element = loop_element.clone().insertBefore(loop_element);
+            //clone it. and give it the new class
+            cloned_element.addClass('level_'+ (index + 1) );
+            cloned_element.removeClass('level_'+ (index + 2));
+            loop_element.remove();
+            if(index === 0){
+                self._new_element = cloned_element;
+            }
+        });
+        //maybe add a new dawg!
+
+
+        rebindHammer(self._new_element); //this also sets the _element variable
+        moved_x = 0;
+        moved_y = 0;
+    }
+    function clickHandlers(){
+        $('#like').click(function() {
+          next('left');
+        });
+        $('#dislike').click(function() {
+          next('right');
+        });
+        $('#info').click(function(){
+            showDetails(self.dogs[0])
+            self.detail_view = true;
+        });
+    }
+
 };
