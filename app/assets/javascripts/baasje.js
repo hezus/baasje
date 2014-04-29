@@ -61,7 +61,7 @@ var Baasje = function(element, loader, json_url){
     function hideLoader(){
          $('#ui').show();
         $('body').css('width', '320px')
-         $('#loader').hide();
+         $('#loader').remove();
     };
 
     function setPaneDimensions() {
